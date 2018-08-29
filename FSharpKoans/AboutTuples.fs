@@ -14,7 +14,7 @@ module ``about tuples`` =
     let CreatingTuples() =
         let items = ("apple", "dog")
         
-        AssertEquality items ("apple", __)
+        AssertEquality items ("apple", "dog")
         
     [<Koan>]
     let AccessingTupleElements() =
