@@ -60,6 +60,24 @@ module ``about the stock example`` =
 
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+        let splitCommas (x:string) =
+            x.Split([|','|])
+            
+        let calculatePriceDifference (``open``: double) (close: double) =
+            ((abs close) - (abs ``open``))
+            
+        let dataToTuple (data: string []) =
+            let ``open`` = System.Double.Parse data.[1]
+            let close = System.Double.Parse data.[6]
+            (data.[0], (calculatePriceDifference ``open`` close))
+
+        let maxStock = 
+            stockData
+            |> List.skip 1
+            |> List.map splitCommas
+            |> List.map dataToTuple
+            |> List.maxBy snd
+
+        let result =  fst maxStock
         
         AssertEquality "2012-03-13" result
